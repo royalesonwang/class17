@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>图片展示</title>
+    <link href="https://fonts.googleapis.com/css?family=Arimo:400,600,700" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="css/main.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = parseInt(urlParams.get('id'));
+
+            if (!id) {
+                document.getElementById("content").innerHTML = "<p>Invalid or missing ID parameter!</p>";
+                return;
+            }
+
+            fetch('./img_data/img.json')
+                .then(response => response.json())
+                .then(data => {
+                    const image = data.find(item => item.id === id);
+                    if (!image) {
+                        document.getElementById("content").innerHTML = "<p>Image not found!</p>";
+                        return;
+                    }
+
+                    const typeMap = {
+                        n100: "男/女子100m",
+                        bjrc: "校运会以外的班级日常",
+                        s400: "4×400",
+                        s100: "4×100",
+                        nz400: "男子400m和1500m",
+                        tg: "男/女子跳高和跳远",
+                        flt: "翻轮胎",
+                        hd: "班级/教工活动",
+                        dby: "班级大本营日常",
+                        tw: "摊位",
+                        cosplay: "cosplay",
+                        qt: "其他",
+                        hz: "合照"
+                    };
+
+                    const type2 = typeMap[image.type] || "未知类型";
+                    const keywords = image.keywords.split('*').map(tag => `<a class='badge badge-primary' href='search.html?s=${tag}'>${tag}</a>`).join(" ");
+                    const uploadTime = new Date(image.time * 1000).toLocaleString();
+
+                    document.getElementById("content").innerHTML = `
+                        <h3 class="font-weight-normal">查看图片</h3>
+                        <img class="img-fluid mt-4" src="../upload/compress/${image.img}" alt="Image ${image.id}" />
+                        <div class="row mt-5">
+                            <div class="col-md-3">
+                                <h5>标签</h5>
+                                <a class="badge badge-primary" href="index.html">${type2}</a>
+                                ${keywords}
+                                <h5 class="pt-4">上传时间</h5>
+                                <p>${uploadTime}</p>
+                                <h5>上传者</h5>
+                                <p>${image.uploader}</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p>${image.demo}</p>
+                                <br>
+                                <a href="./upload/pic/${image.img}" download="${image.img}" class="badge badge-primary" target="_blank">下载原图</a>
+                            </div>
+                        </div>`;
+                })
+                .catch(error => {
+                    console.error("Error loading JSON data:", error);
+                    document.getElementById("content").innerHTML = "<p>Error loading image data!</p>";
+                });
+        });
+    </script>
+</head>
+<body>
+    <div class="page">
+        <div class="page-content">
+            <div class="container">
+                <div id="content" class="container pp-section"></div>
+            </div>
+        </div>
+        <footer class="pp-footer">
+            <div class="container py-5">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <p style="color:#000;">Copyright &copy;2025 EsonWang,EdwardSu, All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

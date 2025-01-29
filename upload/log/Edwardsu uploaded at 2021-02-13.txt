@@ -1,0 +1,8 @@
+PicComp script Ver2.00.3 From@EdwardSu Allrightsreserved
+Power by Python 3.8.2
+Core Version 21F02TU
+****Running at OnlineMod****
+消息隐藏模式
+Copy 1613188749_856.jpg successfully
+failed to insert 1613188749_856.jpg's info
+Task Finished!

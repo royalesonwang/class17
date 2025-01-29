@@ -1,0 +1,263 @@
+/* CSS Document */
+@charset "utf-8";
+@font-face{
+	font-family: 'dengxian';
+	src: url("../font/cn.ttf");
+}
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    font-size: 18px;
+	background-color: #F7F7F7;
+}
+.banner {
+    position: relative;
+	z-index: 888;
+}
+.word {
+    color: #fff;
+    font-size: 250%;
+    text-align: center;
+    font-family: dengxian;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 70%;
+    margin-left: -35%;
+}
+.logo {
+    position: fixed;
+    left: 10px;
+    top: 0px;
+    border: none;
+    border-radius: 0px;
+}
+.main,form{
+    margin:100px 10%;
+	padding:5% 10%;
+	float:left;
+	width:60%;
+	font-family: news;
+	border:solid 1px #d7d7d7;
+	background:#fff;
+}
+.main .text{
+	font-size: 24px;
+}
+.main .text_f{
+	float:left;
+	width:45%;
+	padding:0 2.5%;
+	text-align:left;
+}
+.img{
+	padding: 0 2.5%; /* adjust 10% to align with text */
+}
+.img img{
+	float:right;
+	width:45%;
+}
+.content {
+    background-color:#0CF;
+    width: 1000px;
+	margin-top:80px;
+	margin-left:auto;
+	margin-right:auto;
+    padding: 30px;
+    border-radius: 20px;
+    font-family: news;
+    border: 5px solid #FC0;
+    font-size: 20px;
+    z-index: 0;
+}
+.contentcn {
+    background-color: #0CF;
+    width: 1000px;
+    margin: 0px auto;                  /*指定左右外边距自动计算*/
+    padding: 30px;
+    border-radius: 20px;/*边框圆角形*/
+    font-family: dengxian;
+    border: 5px solid #FC0;
+    font-size: 16px;
+    z-index: 0;
+}
+a {
+    font-family: news;
+    position: relative;
+    color: #686868;
+    text-decoration: none;
+}
+a:hover {
+    color: #000;
+}
+p .cn {
+    font-family: 微软雅黑；
+}
+a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    -o-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}    /*设置下划线*/
+a:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    -o-transform: scaleX(1);
+    transform: scaleX(1);
+}
+.news {
+    font-size: 24px;
+}
+img {
+    border: 5px solid #000;
+    border-radius: 20px;
+	vertical-align:middle;
+}
+.title {
+    font-family: welcome;
+}
+footer {
+	font-family: news;
+	text-align:center;
+	color:#fff;
+}
+h2 {
+    font-family: news;
+}
+.show:hover {
+    background-color: #fff;
+}
+input[type="text"]{
+	padding:0px 15px;
+	font-family:news;
+	font-size:20px;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+	border:#A2A2A2 2px solid;
+	width:30%;
+	height:40px;
+}
+input[type="password"]{
+	padding:0px 15px;
+	font-family:news;
+	font-size:20px;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+	border:#A2A2A2 2px solid;
+	width:30%;
+	height:40px;
+}
+input:focus{
+	outline: none;
+	    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    border:#399FFF 2px solid;
+	box-shadow:0px 0px 5px #399FFF;
+}
+input[type="submit"]{
+	padding:0px 15px;
+	font-family:news;
+	font-size:20px;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+	border:#A2A2A2 2px solid;
+	background:#FFFFFF;
+	width:75px;
+	height:5%;
+}
+input[type="submit"]:hover{
+	outline: none;
+	-webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    border:#399FFF 2px solid;
+	box-shadow:0px 0px 10px #399FFF;
+}
+textarea{
+	padding:10px 15px;
+	font-family:news;
+	font-size:20px;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+	border:#A2A2A2 2px solid;
+	width:70%;
+	resize: none;
+}
+textarea:focus{
+	outline: none;
+	-webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    border:#399FFF 2px solid;
+	box-shadow:0px 0px 5px #399FFF;
+}
+select{
+	padding:0px 15px;
+	font-family:news;
+	font-size:20px;
+	-webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+	border:#A2A2A2 2px solid;
+	border-radius: 20px;
+}
+select:hover{
+	-webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    border:#399FFF 2px solid;
+	box-shadow:0px 0px 5px #399FFF;
+}
+select:focus{
+		outline: none;
+}
+.list{
+	margin:100px 10%;
+	padding:5% 10%;
+	float:left;
+	width:60%;
+	font-family: news;
+	border:solid 1px #d7d7d7;
+	background:#fff;
+}
+.list tr,td{
+	border:0;
+	font-size:24px;
+	text-align:left;
+	padding:20px;
+}
+.list tr:hover{
+    background:#e7e7e7;
+        }
+.list table{
+	text-align:center;
+}
+.list td{
+	border-bottom:1px solid #666666;
+}

@@ -1,0 +1,4 @@
+PicComp script Ver2.00.3 From@EdwardSu Allrightsreserved
+Power by Python 3.8.2
+Core Version 21F17WE
+****Running at OnlineMod****

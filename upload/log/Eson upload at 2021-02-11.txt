@@ -1,0 +1,7 @@
+PictureCompressingscriptVer2.00.2From@EdwardSu Allrightsreserved
+Power by Python 3.8.2
+Core Version 21F02TU
+****Running at OnlineMod****
+消息隐藏模式
+C:\www\upload\pic\1613021857_341.JPG
+Task Finished!

@@ -1,0 +1,16 @@
+PicComp script Ver2.00.3 From@EdwardSu Allrightsreserved
+Power by Python 3.8.2
+Core Version 21F17WE
+****Running at OnlineMod****
+消息回显模式
+源文件删除模式
+源目录 C:\www\upload\temp 网页大图目录 C:\www\upload\compress 压缩原图目录 C:\www\upload\pic 缩略图目录 C:\www\upload\icon
+一压阈值(大小) 2097152.0 B     一压阈值(尺寸) 3000
+二压阈值(大小) 1048576.0 B     二压阈值(尺寸) 1500
+三压阈值(大小) 209715.2 B     三压阈值(尺寸) 600
+目标大小 /一压/二压/三压 3000 / 1500 / 600
+dealing 1613535120_315.JPG successfully in  3 c Size(X*Y) 3000 * 2000
+dealing 1613535120_315.JPG successfully in  2 c Size(X*Y) 1500 * 1000
+dealing 1613535120_315.JPG successfully in  1 c Size(X*Y) 600 * 400
+1613535120_315.JPG's info load into db successfully
+Task Finished!

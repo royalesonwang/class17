@@ -1,0 +1,6 @@
+PicComp script Ver2.00.3 From@EdwardSu Allrightsreserved
+Power by Python 3.8.2
+Core Version 21F02TU
+****Running at OnlineMod****
+消息隐藏模式
+Task Finished!

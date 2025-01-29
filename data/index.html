@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible=IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>所有照片</title>
+  <meta name="description" content=""/>
+  <link href="css/main.css" rel="stylesheet">
+</head>
+<body id="top">
+  <div class="page">
+    <!-- 导航栏 -->
+    <header class="pp-header">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a href="index.html"><img src="images/favicon.png"></a>
+          <a class="navbar-brand" href="index.html">Class 17</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active"><a class="nav-link" href="index.html">首页</a></li>
+              <li class="nav-item">
+                <form id="searchForm" class="search-form">
+                  <input type="text" name="s" placeholder="搜索关键词..." style="outline: none;" autoComplete="off" />
+                  <input type="submit" value="搜索" class="btn btn-primary"/>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="page-content">
+      <div class="container">
+        <h1 class="h3">17班照片</h1>
+        <p id="searchKeyword" color="#917c55"></p>
+      </div>
+
+      <!-- 分类筛选 -->
+      <div class="container px-0 py-4">
+        <div class="pp-category-filter">
+          <a id="allPhotosButton" class="btn btn-outline-primary" href="index.html">所有照片</a>
+          <div id="categoryButtons"></div>
+        </div>
+      </div>
+
+      <!-- 图片展示 -->
+      <div class="container px-0">
+        <div class="pp-gallery">
+          <div id="imageContainer" class="card-columns"></div>
+          <div align="center">
+            <br>当前筛选总共 <span id="filteredTotal"></span> 张照片<br>
+            <div id="pagination"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="pp-footer">
+      <div class="container py-5">
+          <div class="row text-center">
+              <div class="col-md-12">
+                <p style="color:#000;">Copyright &copy;2025 EsonWang,EdwardSu, All rights reserved.</p>
+              </div>
+          </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const searchForm = document.getElementById("searchForm");
+      const imageContainer = document.getElementById("imageContainer");
+      const filteredTotalElement = document.getElementById("filteredTotal");
+      const paginationContainer = document.getElementById("pagination");
+      const searchKeywordElement = document.getElementById("searchKeyword");
+      const categoryButtons = document.getElementById("categoryButtons");
+      const allPhotosButton = document.getElementById("allPhotosButton");
+
+      const typeMap = {
+        n100: "男/女子100m", bjrc: "校运会以外的班级日常", s400: "4×400",
+        s100: "4×100", nz400: "男子400m和1500m", tg: "男/女子跳高和跳远",
+        flt: "翻轮胎", hd: "班级/教工活动", dby: "班级大本营日常",
+        tw: "摊位", cosplay: "cosplay", qt: "其他", hz: "合照"
+      };
+
+      let allImages = [];
+      try {
+        const response = await fetch('./img_data/img.json');
+        allImages = await response.json();
+      } catch (error) {
+        console.error("Error loading JSON data:", error);
+        return;
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchQuery = urlParams.get("s") || "";
+      const typeFilter = urlParams.get("type") || "";
+      const currentPage = parseInt(urlParams.get("page")) || 1;
+      const pageSize = 15;
+
+      // 生成类别筛选按钮，并高亮当前选中类别
+      const categories = new Set(allImages.map(img => img.type));
+      categoryButtons.innerHTML = "";
+      categories.forEach(category => {
+        const btn = document.createElement("a");
+        btn.className = `btn btn-outline-primary ${category === typeFilter ? "active" : ""}`;
+        btn.href = `?type=${category}`;
+        btn.textContent = typeMap[category] || "未知";
+        categoryButtons.appendChild(btn);
+      });
+
+      // 更新 "所有照片" 按钮状态
+      if (!typeFilter) {
+        allPhotosButton.classList.add("active");
+      } else {
+        allPhotosButton.classList.remove("active");
+      }
+
+      // 根据关键词或类型筛选图片，并按 id 倒序排序
+      let filteredImages = allImages;
+      if (searchQuery) {
+        filteredImages = filteredImages.filter(img => img.keywords.includes(searchQuery));
+        searchKeywordElement.textContent = `搜索关键字：${searchQuery}`;
+      }
+      if (typeFilter) {
+        filteredImages = filteredImages.filter(img => img.type === typeFilter);
+      }
+
+      // 按 ID 倒序排列
+      filteredImages.sort((a, b) => b.id - a.id);
+
+      // **确保总数正确**
+      filteredTotalElement.textContent = filteredImages.length;
+
+      // **分页**
+      const totalPages = Math.ceil(filteredImages.length / pageSize);
+      const startIndex = (currentPage - 1) * pageSize;
+      const paginatedImages = filteredImages.slice(startIndex, startIndex + pageSize);
+
+      // **渲染图片**
+      imageContainer.innerHTML = "";
+      paginatedImages.forEach(image => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <a href="detail.html?id=${image.id}" target="_blank">
+            <figure class="pp-effect">
+              <img class="img-fluid" src="../upload/icon/${image.img}" alt="${image.keywords}" />
+              <figcaption>
+                <div class="h4">${typeMap[image.type] || "未知"}</div>
+                <p>Photoed by ${image.uploader}</p>
+              </figcaption>
+            </figure>
+          </a>
+        `;
+        imageContainer.appendChild(card);
+      });
+
+      // **渲染分页**
+      paginationContainer.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+          const link = document.createElement("a");
+          link.className = i === currentPage ? "btn btn-primary" : "btn btn-outline-primary";
+          link.href = `?page=${i}${searchQuery ? `&s=${searchQuery}` : ""}${typeFilter ? `&type=${typeFilter}` : ""}`;
+          link.textContent = i;
+          paginationContainer.appendChild(link);
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+          const ellipsis = document.createElement("span");
+          ellipsis.textContent = "...";
+          paginationContainer.appendChild(ellipsis);
+        }
+      }
+
+      // **搜索提交**
+      searchForm.addEventListener("submit", event => {
+        event.preventDefault();
+        const query = searchForm.querySelector("input[name='s']").value.trim();
+        window.location.href = `?s=${query}`;
+      });
+    });
+  </script>
+</body>
+</html>
